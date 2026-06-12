@@ -63,7 +63,7 @@ gh api /repos/{owner}/{repo}/pulls/<num>/comments --jq '.[] | select(.user.login
 
 Filter out resolved threads via GraphQL `reviewThreads` (`isResolved: false` only).
 
-Per finding, triage: accept / reject / unsure — full workflow in [../gh-copilot-address-pr/SKILL.md](../gh-copilot-address-pr/SKILL.md). In short:
+Per finding, triage: accept / reject / unsure — full reply/resolve workflow in the `gh-copilot-address-pr` skill (use it if available). In short:
 
 - **Accept**: fix it, reply "addressed" with what changed, resolve the thread.
 - **Reject**: reply with the reason (false positive, out of scope), resolve the thread.
