@@ -67,12 +67,32 @@ Confirm the layout:
 - **Single-context** — one `CONTEXT.md` + `docs/adr/` at the repo root. Most repos are this.
 - **Multi-context** — `CONTEXT-MAP.md` at the root pointing to per-context `CONTEXT.md` files (typically a monorepo).
 
+**Section D — Stack & verification commands.**
+
+> Explainer: The universal-method skills (`tdd`, `debugging-and-error-recovery`,
+> `security-and-hardening`, `code-review`, `implement-spec`, …) are
+> language-agnostic — they describe the *method*, not the toolchain. They learn
+> *this* repo's actual commands (lint, type-check, unit/integration tests,
+> build) from one file so the same skill works against a TS, Go, Rust, or Java
+> repo. This is what lets the skill set extend across languages without forking.
+
+Detect the toolchain and propose the commands; don't assume one ecosystem:
+
+- **Package manager / build**: presence of `package.json` (npm/pnpm/yarn),
+  `go.mod` (Go), `Cargo.toml` (Rust), `pom.xml` / `build.gradle` (Java).
+- **Lint/format, type-check, unit, integration/e2e, build**: read the repo's
+  scripts (`package.json` `scripts`, `Makefile`, `justfile`, CI workflow) and
+  propose the real commands. If the repo already documents a verification
+  table in `AGENTS.md`/`CONTEXT.md`, point at it rather than duplicating.
+
+Confirm the detected commands with the user before writing.
+
 ### 3. Confirm and edit
 
 Show the user a draft of:
 
 - The `## Agent skills` block to add to whichever of `CLAUDE.md` / `AGENTS.md` is being edited (see step 4 for selection rules)
-- The contents of `docs/agents/issue-tracker.md`, `docs/agents/triage-labels.md`, `docs/agents/domain.md`
+- The contents of `docs/agents/issue-tracker.md`, `docs/agents/triage-labels.md`, `docs/agents/domain.md`, `docs/agents/verification.md`
 
 Let them edit before writing.
 
@@ -104,6 +124,10 @@ The block:
 ### Domain docs
 
 [one-line summary of layout — "single-context" or "multi-context"]. See `docs/agents/domain.md`.
+
+### Stack & verification
+
+[one-line summary of stack — e.g. "Next.js / pnpm / Biome / Vitest / Playwright"]. The commands universal skills run live in `docs/agents/verification.md`.
 ```
 
 Then write the three docs files using the seed templates in this skill folder as a starting point:
@@ -113,6 +137,7 @@ Then write the three docs files using the seed templates in this skill folder as
 - [issue-tracker-local.md](./references/issue-tracker-local.md) — local-markdown issue tracker
 - [triage-labels.md](./references/triage-labels.md) — label mapping
 - [domain.md](./references/domain.md) — domain doc consumer rules + layout
+- [verification.md](./references/verification.md) — stack + verification command table (the injection point for universal skills)
 
 For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch using the user's description.
 
