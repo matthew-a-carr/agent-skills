@@ -1,40 +1,31 @@
-# Agent Skills
+# ⚠️ This repository has moved
 
-A plugin marketplace of [Agent Skills](https://agentskills.io)-format skills for Claude Code, Codex CLI, Cursor, Gemini CLI, and any other host that speaks the open spec.
+This project has been consolidated into the **[ai-plugins](https://github.com/matthew-a-carr/ai-plugins)** monorepo.
 
-`AGENTS.md` (with its `CLAUDE.md` symlink) holds repo-local conventions for editing the skills here — not org-wide agent instructions. Plugin scope is `skills/` only.
+👉 **New location:** [`matthew-a-carr/ai-plugins/plugins/agent-skills`](https://github.com/matthew-a-carr/ai-plugins/tree/main/plugins/agent-skills)
 
-Attribution for forked skills: see [`skills/ATTRIBUTION.md`](skills/ATTRIBUTION.md).
+## What changed?
 
-## Install
+`agent-skills`, `engineering-principles`, and the `claude-plugins` marketplace catalog have been merged into a single repository:
 
-### Claude Code
+- **[`plugins/agent-skills/`](https://github.com/matthew-a-carr/ai-plugins/tree/main/plugins/agent-skills)** — 26 reusable agent skills (TDD, handoff, grilling, PR helpers, spec lifecycle, etc.)
+- **[`plugins/engineering-principles/`](https://github.com/matthew-a-carr/ai-plugins/tree/main/plugins/engineering-principles)** — Engineering principles, patterns, and 3 skills
 
-```text
-/plugin marketplace add matthew-a-carr/claude-plugins
-/plugin install agent-skills@matthew-a-carr
+## Plugin installation
+
+Plugin names are unchanged. Update only the marketplace URL:
+
+```jsonc
+{
+  "extraKnownMarketplaces": {
+    "matthew-a-carr": {
+      "source": { "source": "github", "repo": "matthew-a-carr/ai-plugins" }
+    }
+  },
+  "enabledPlugins": {
+    "agent-skills@matthew-a-carr": true
+  }
+}
 ```
 
-### Codex CLI
-
-```text
-$skill-installer matthew-a-carr/agent-skills
-```
-
-### Any agent (skills.sh)
-
-```bash
-npx skills@latest add matthew-a-carr/agent-skills
-```
-
-### Symlink loop (live updates via `git pull`)
-
-```bash
-for skill in skills/*/; do
-  name=$(basename "$skill")
-  for dir in ~/.claude/skills ~/.agents/skills ~/.cursor/skills ~/.gemini/skills; do
-    mkdir -p "$dir"
-    ln -sf "$(pwd)/$skill" "$dir/$name"
-  done
-done
-```
+This repository is archived and will not receive further updates.
